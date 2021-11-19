@@ -58,13 +58,14 @@ namespace Battleship
             Console.BackgroundColor = colors[0];
             for (var i = 0; i < _rows; i++)
             {
+                Console.Write("   ");
                 for (var j = 0; j < _columns; j++)
                 {
                     if (i == indexOfRow && j == indexOfColumn)
                     {
                         if (_board.BoardCells[cell].CellValue > 0)
                         {
-                            Console.ForegroundColor = colors[11];
+                            Console.ForegroundColor = colors[_board.BoardCells[cell].CellValue];
                             Console.Write(_board.BoardCells[cell].CellValue);
                         }
                         else
