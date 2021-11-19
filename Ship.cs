@@ -27,6 +27,7 @@ namespace Battleship
 
         private void gettingStartingPosition()
         {
+            //to do: find position with one empty cell around
             do
             {
                 randomStartingCell();
@@ -127,11 +128,11 @@ namespace Battleship
                 {
                     finalPositions.Add(allAvailablePositions[(_shipSize * positionIndexSet) + i]);
                 }
-            }
+            }/*
             else
             {
                 Console.WriteLine("No available positions!");
-            }
+            }*/
             return finalPositions;
         }
 

@@ -4,7 +4,6 @@ C:\Users\Marek\source\repos\Battleship\Battleship\bin\Debug\netcoreapp3.1\Battle
 C:\Users\Marek\source\repos\Battleship\Battleship\bin\Debug\netcoreapp3.1\Battleship.runtimeconfig.dev.json
 C:\Users\Marek\source\repos\Battleship\Battleship\bin\Debug\netcoreapp3.1\Battleship.dll
 C:\Users\Marek\source\repos\Battleship\Battleship\bin\Debug\netcoreapp3.1\Battleship.pdb
-C:\Users\Marek\source\repos\Battleship\Battleship\obj\Debug\netcoreapp3.1\Battleship.csproj.AssemblyReference.cache
 C:\Users\Marek\source\repos\Battleship\Battleship\obj\Debug\netcoreapp3.1\Battleship.AssemblyInfoInputs.cache
 C:\Users\Marek\source\repos\Battleship\Battleship\obj\Debug\netcoreapp3.1\Battleship.AssemblyInfo.cs
 C:\Users\Marek\source\repos\Battleship\Battleship\obj\Debug\netcoreapp3.1\Battleship.csproj.CoreCompileInputs.cache
@@ -12,3 +11,4 @@ C:\Users\Marek\source\repos\Battleship\Battleship\obj\Debug\netcoreapp3.1\Battle
 C:\Users\Marek\source\repos\Battleship\Battleship\obj\Debug\netcoreapp3.1\Battleship.pdb
 C:\Users\Marek\source\repos\Battleship\Battleship\obj\Debug\netcoreapp3.1\Battleship.genruntimeconfig.cache
 C:\Users\Marek\source\repos\Battleship\Battleship\obj\Debug\netcoreapp3.1\Battleship.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marek\source\repos\Battleship\Battleship\obj\Debug\netcoreapp3.1\Battleship.csproj.AssemblyReference.cache

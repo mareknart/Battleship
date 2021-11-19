@@ -6,31 +6,23 @@ namespace Battleship
     class Program
     {
         static void Main(string[] args)
-        {
-            Console.Clear();
-            /*
-            var napis = "HelloWorld!Hell";
-            ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
-            Console.WriteLine(colors.Length);
-            //var randomColour = new Random();
-            int kolor = 1;
-            foreach (var znak in napis)
-            {
-                Console.ForegroundColor = colors[kolor];
-                Console.Write(znak);
-                Console.ResetColor();
-                kolor++;
-            }*/
-            //Console.SetWindowSize(160, 40);
-            //Console.SetBufferSize(160, 40);
+        {      
+            string title = "Battleships";
 
-            var plansza = new Board();
+            Console.SetWindowSize(100, 40);
+            Console.SetBufferSize(100, 40);
+            Console.Clear();
+            Console.SetCursorPosition(Console.WindowWidth/2-title.Length/2,0);
+            Console.WriteLine(title);
+
+            var board = new Board();
+            var guiBoard = new BoardGui(board);
             int[] fleetTable = { 5, 4, 4, 3, 3, 3, 2, 2, 2, 2 };
             Ship[] ships = new Ship[10];
             int[,] boardData = new int[30,30];
             for (var i = 0; i < fleetTable.Length; i++)
             {
-                ships[i] = new Ship(fleetTable[i], plansza);
+                ships[i] = new Ship(fleetTable[i], board);
             }
 
             for (var i = 0; i < fleetTable.Length; i++)
@@ -38,10 +30,11 @@ namespace Battleship
                 var positions = ships[i].positionShip();
                 foreach (var item in positions)
                 {
-                    plansza.UpdateBoard(item, true, fleetTable[i]);
+                    board.UpdateBoard(item, true, fleetTable[i]);
                 }
             }
-            plansza.DrawBoard();
+            guiBoard.DrawBoard();
+
         }
     }
 }

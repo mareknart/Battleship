@@ -6,6 +6,5 @@ namespace Battleship
         Cell [] BoardCells { get; set; }
         void InitialiseBoard();
         void UpdateBoard(int CellNo, bool full, int shipNumber);
-        void DrawBoard();
     }
 }
