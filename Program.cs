@@ -14,7 +14,7 @@ namespace Battleship
             Console.Clear();
             Console.SetCursorPosition(Console.WindowWidth/2-title.Length/2,0);
             Console.WriteLine(title);
-
+            Console.WriteLine();
             var board = new Board();
             var guiBoard = new BoardGui(board);
             int[] fleetTable = { 5, 4, 4, 3, 3, 3, 2, 2, 2, 2 };
@@ -34,7 +34,7 @@ namespace Battleship
                 }
             }
             guiBoard.DrawBoard();
-
+            Console.ReadKey();
         }
     }
 }
