@@ -6,12 +6,12 @@ namespace Battleship
     {
         private string _columnName = "ABCDEFGHIJ";
 
-        private readonly IBoardInitialise _board;
-
+        private readonly IBoardInitialise _board1;
+        private readonly IBoardInitialise _board2;
         private string[,] boardData;
         private const int _columns = 42;
         private const int _rows = 22;
-        public BoardGui(IBoardInitialise board)
+        public BoardGui(IBoardInitialise board1, IBoardInitialise board2)
         {
             /*
                   A   B
@@ -19,13 +19,14 @@ namespace Battleship
                1| M | H |
                 +---+---+
             */
-            _board = board;
+            _board1 = board1;
+            _board2 = board2;
             boardGuiInitialise();
         }
         private void boardGuiInitialise()
         {
             boardData = new string[_rows, _columns]{
-                {"  "," "," ","A"," "," "," ","B"," "," "," ","C"," "," "," ","D"," "," "," ","E"," "," "," ","F"," "," "," ","G"," "," "," ","I"," "," "," ","J"," "," "," ","H"," "," "},
+                {"  "," "," ","A"," "," "," ","B"," "," "," ","C"," "," "," ","D"," "," "," ","E"," "," "," ","F"," "," "," ","G"," "," "," ","H"," "," "," ","I"," "," "," ","J"," "," "},
                 {"  ","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+"},
                 {" 1","|"," "," "," ","|"," "," "," ","|"," "," "," ","|"," "," "," ","|"," "," "," ","|"," "," "," ","|"," "," "," ","|"," "," "," ","|"," "," "," ","|"," "," "," ","|"},
                 {"  ","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+","-","-","-","+"},
@@ -53,32 +54,56 @@ namespace Battleship
         {
             int indexOfColumn = 3;
             int indexOfRow = 2;
-            int cell = 0;
+            int board1cell = 0;
+            int board2cell = 0;
             ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
             Console.BackgroundColor = colors[0];
             for (var i = 0; i < _rows; i++)
             {
-                Console.Write("   ");
+                Console.Write("    ");
                 for (var j = 0; j < _columns; j++)
                 {
                     if (i == indexOfRow && j == indexOfColumn)
                     {
-                        if (_board.BoardCells[cell].CellValue > 0)
+                        if (_board1.BoardCells[board1cell].CellValue > 0)
                         {
-                            Console.ForegroundColor = colors[_board.BoardCells[cell].CellValue];
-                            Console.Write(_board.BoardCells[cell].CellValue);
+                            Console.ForegroundColor = colors[_board1.BoardCells[board1cell].CellValue];
+                            Console.Write(_board1.BoardCells[board1cell].CellValue);
                         }
                         else
                         {
                             Console.Write(" ");
                         }
-                        cell++;
+                        board1cell++;
                         indexOfColumn += 4;
                     }
                     else
                     {
                         Console.ForegroundColor = colors[15];
                         Console.Write(boardData[i, j]);
+                    }
+                }
+                Console.Write("      ");
+                for (var j = 40; j < _columns + 40; j++)
+                {
+                    if (i == indexOfRow && j == indexOfColumn)
+                    {
+                        if (_board2.BoardCells[board2cell].CellValue > 0)
+                        {
+                            Console.ForegroundColor = colors[_board2.BoardCells[board2cell].CellValue];
+                            Console.Write(_board2.BoardCells[board2cell].CellValue);
+                        }
+                        else
+                        {
+                            Console.Write(" ");
+                        }
+                        board2cell++;
+                        indexOfColumn += 4;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = colors[15];
+                        Console.Write(boardData[i, j - 40]);
                     }
                 }
                 if (i == indexOfRow)
@@ -88,7 +113,6 @@ namespace Battleship
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine();
         }
     }
 }

@@ -22,19 +22,61 @@ namespace Battleship
         private int randomStartingCell()
         {
             var randomNumber = new Random();
-            return _startingCell = randomNumber.Next(0, 99);
+            _startingCell = randomNumber.Next(0, 99);
+            _rowStartingPosition = _startingCell / 10;
+            _columnStartingPosition = _startingCell - (_rowStartingPosition * 10);
+            return _startingCell;
         }
 
         private void gettingStartingPosition()
         {
-            //to do: find position with one empty cell around
+            bool cellsChecker = false;
             do
             {
-                randomStartingCell();
-            } while (_board.BoardCells[_startingCell].IsFull);
-            _rowStartingPosition = _startingCell / 10;
-            _columnStartingPosition = _startingCell - (_rowStartingPosition * 10);
-            //Console.WriteLine($"Startowa pozycja: Cell {_startingCell} X:{_columnStartingPosition} Y:{_rowStartingPosition}");
+                cellsChecker = checkCellsAround(randomStartingCell());
+            } while (_board.BoardCells[_startingCell].IsFull || cellsChecker);
+        }
+
+        private bool checkCellsAround(int cellId)
+        {
+            List<bool> neigboursCells = new List<bool>();
+            //upper cell
+            if (_rowStartingPosition - 1 >= 0)
+            {
+                if (cellId > 9)
+                {
+                    neigboursCells.Add(_board.BoardCells[cellId - 10].IsFull);
+                }
+            }
+            //bottom cell
+            if (_rowStartingPosition + 1 <= 9)
+            {
+                if (cellId < 90)
+                {
+                    neigboursCells.Add(_board.BoardCells[cellId + 10].IsFull);
+                }
+            }
+            //right cell
+            if (_columnStartingPosition + 1 <= 9)
+            {
+                if (cellId % 10 != 9)
+                {
+                    neigboursCells.Add(_board.BoardCells[cellId + 1].IsFull);
+                }
+            }
+            //left cell
+            if (_columnStartingPosition - 1 <= 0)
+            {
+                if (cellId % 10 != 0)
+                {
+                    neigboursCells.Add(_board.BoardCells[cellId - 1].IsFull);
+                }
+            }
+            if (neigboursCells.Contains(true))
+            {
+                return true;
+            }
+            else { return false; }
         }
 
         private void findDirections()
@@ -140,11 +182,12 @@ namespace Battleship
         {
             List<int> emptyPositions = new List<int>();
             List<int> cells = new List<int>();
-            for (var i=0; i<100; i++){
+            for (var i = 0; i < 100; i++)
+            {
                 cells.Add(i);
             }
 
-            while (!emptyPositions.Any() || cells.Count<1)
+            while (!emptyPositions.Any() || cells.Count < 1)
             {
                 gettingStartingPosition();
                 findDirections();
