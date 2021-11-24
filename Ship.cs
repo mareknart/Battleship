@@ -7,6 +7,7 @@ namespace Battleship
     public class Ship
     {
         public int Id { get; set; }
+        public List<int> Lifes {get; set;}
         private int _columnStartingPosition;
         private int _rowStartingPosition;
         private List<int> _directions;
@@ -16,10 +17,10 @@ namespace Battleship
         public Ship(int shipSize, IBoardInitialise board)
         {
             _shipSize = shipSize;
-            _board = board;
+            this._board = board;
         }
 
-        private int randomStartingCell()
+        private int RandomStartingCell()
         {
             var randomNumber = new Random();
             _startingCell = randomNumber.Next(0, 99);
@@ -28,16 +29,16 @@ namespace Battleship
             return _startingCell;
         }
 
-        private void gettingStartingPosition()
+        private void GettingStartingPosition()
         {
             bool cellsChecker = false;
             do
             {
-                cellsChecker = checkCellsAround(randomStartingCell());
+                cellsChecker = CheckCellsAround(RandomStartingCell());
             } while (_board.BoardCells[_startingCell].IsFull || cellsChecker);
         }
 
-        private bool checkCellsAround(int cellId)
+        private bool CheckCellsAround(int cellId)
         {
             List<bool> neigboursCells = new List<bool>();
             //upper cell
@@ -79,7 +80,7 @@ namespace Battleship
             else { return false; }
         }
 
-        private void findDirections()
+        private void FindDirections()
         {
             _directions = new List<int>();
             //directions 0->up, 3->left, 6->down, 9->right
@@ -100,7 +101,7 @@ namespace Battleship
                 _directions.Add(9);
             }
         }
-        private int[,] findPositions()
+        private int[,] FindPositions()
         {
             int[,] positions = new int[_directions.Count, _shipSize];
             int id = 0;
@@ -132,7 +133,7 @@ namespace Battleship
             return positions;
         }
 
-        private List<int> findEmptyPositions(int[,] positions)
+        private List<int> FindEmptyPositions(int[,] positions)
         {
             List<int> allAvailablePositions = new List<int>();
             var numberOfDirections = positions.Length / _shipSize;
@@ -154,7 +155,7 @@ namespace Battleship
             return allAvailablePositions;
         }
 
-        private List<int> findFinalPosition(List<int> allAvailablePositions)
+        private List<int> FindFinalPosition(List<int> allAvailablePositions)
         {
             int numberOfPossibilities = allAvailablePositions.Count / _shipSize;
             int positionIndexSet = 0;
@@ -178,7 +179,7 @@ namespace Battleship
             return finalPositions;
         }
 
-        public List<int> positionShip()
+        public List<int> PositionShip()
         {
             List<int> emptyPositions = new List<int>();
             List<int> cells = new List<int>();
@@ -189,9 +190,9 @@ namespace Battleship
 
             while (!emptyPositions.Any() || cells.Count < 1)
             {
-                gettingStartingPosition();
-                findDirections();
-                emptyPositions = findFinalPosition((findEmptyPositions(findPositions())));
+                GettingStartingPosition();
+                FindDirections();
+                emptyPositions = FindFinalPosition((FindEmptyPositions(FindPositions())));
                 cells.Remove(_startingCell);
             }
             return emptyPositions;

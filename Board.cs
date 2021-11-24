@@ -26,11 +26,12 @@ namespace Battleship
                 }
             }
         }
-        public void UpdateBoard(int cellNo, bool state, int shipNumber)
+        public void UpdateBoard(int cellNo, bool isFull, bool isHit, int shipNumber=0)
         {
-            BoardCells[cellNo].IsFull = state;
+            BoardCells[cellNo].IsFull = isFull;
             BoardCells[cellNo].CellValue = shipNumber;
-        }
+            BoardCells[cellNo].IsHitted = isHit;
+        }/*
         public void DrawBoard()
         {
             ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
@@ -55,12 +56,6 @@ namespace Battleship
                 Console.WriteLine();
             }
             Console.WriteLine();
-            /*
-                  A   B
-                +---+---+
-               1| M | H |
-                +---+---+
-            */
-        }
+        }*/
     }
 }

@@ -5,6 +5,6 @@ namespace Battleship
         int BoardSize { get; set; }
         Cell [] BoardCells { get; set; }
         void InitialiseBoard();
-        void UpdateBoard(int CellNo, bool full, int shipNumber);
+        void UpdateBoard(int cellNo, bool isFull, bool isHit, int shipNumber=0);
     }
 }
