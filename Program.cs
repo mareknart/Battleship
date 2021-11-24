@@ -23,32 +23,25 @@ namespace Battleship
                 Name = "Balbina",
                 board = new Board()
             };
-
+            player1.CreateShips();
+            player2.CreateShips();
             startGame(player1.Name, player2.Name);
 
             var guiBoard = new BoardGui(player1.board, player2.board);
 
-            Ship[] ships1 = new Ship[10];
-            Ship[] ships2 = new Ship[10];
-            List<int> positions1 = new List<int>();
+            
             for (var i = 0; i < fleetTable.Length; i++)
             {
-                ships1[i] = new Ship(fleetTable[i], player1.board);
-                ships2[i] = new Ship(fleetTable[i], player2.board);
-            }
-
-            for (var i = 0; i < fleetTable.Length; i++)
-            {
-                positions1 = ships1[i].PositionShip();
-                ships1[i].Lifes = positions1;
-                foreach (var item in positions1)
+                var positions1 = player1.ships[i].PositionShip();
+                player1.ships[i].Lifes = positions1;
+                foreach (var cellNumber in positions1)
                 {
-                    player1.board.UpdateBoard(item, true, false, fleetTable[i]);
+                    player1.board.UpdateBoard(cellNumber, true, false, fleetTable[i]);
                 }
-                var positions2 = ships2[i].PositionShip();
-                foreach (var item in positions2)
+                var positions2 = player2.ships[i].PositionShip();
+                foreach (var cellNumber in positions2)
                 {
-                    player2.board.UpdateBoard(item, true, false, fleetTable[i]);
+                    player2.board.UpdateBoard(cellNumber, true, false, fleetTable[i]);
                 }
             }
             guiBoard.DrawBoard();
