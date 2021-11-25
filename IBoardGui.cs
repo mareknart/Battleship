@@ -2,7 +2,8 @@ using System;
 
 namespace Battleship
 {
-    public interface IBoardGui{
+    public interface IBoardGui
+    {
         void DrawBoard();
     }
 }

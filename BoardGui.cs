@@ -4,7 +4,7 @@ namespace Battleship
 {
     public class BoardGui : IBoardGui
     {
-        private string _columnName = "ABCDEFGHIJ";
+        //private string _columnName = "ABCDEFGHIJ";
         private ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
         private readonly IBoardInitialise _board1;
         private readonly IBoardInitialise _board2;

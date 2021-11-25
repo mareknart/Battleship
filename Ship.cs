@@ -13,6 +13,7 @@ namespace Battleship
         private List<int> _directions;
         private int _shipSize;
         private int _startingCell;
+        private int rowLength = 10;
         private readonly IBoardInitialise _board;
         public Ship(int shipSize, IBoardInitialise board)
         {
@@ -24,8 +25,8 @@ namespace Battleship
         {
             var randomNumber = new Random();
             _startingCell = randomNumber.Next(0, 99);
-            _rowStartingPosition = _startingCell / 10;
-            _columnStartingPosition = _startingCell - (_rowStartingPosition * 10);
+            _rowStartingPosition = _startingCell / rowLength;
+            _columnStartingPosition = _startingCell - (_rowStartingPosition * rowLength);
             return _startingCell;
         }
 
@@ -101,6 +102,7 @@ namespace Battleship
                 _directions.Add(9);
             }
         }
+
         private int[,] FindPositions()
         {
             int[,] positions = new int[_directions.Count, _shipSize];
@@ -112,7 +114,7 @@ namespace Battleship
                     switch (_directions[i])
                     {
                         case 0:
-                            id = _startingCell - (j * 10);
+                            id = _startingCell - (j * rowLength);
                             positions[i, j] = id;
                             break;
                         case 3:
@@ -120,7 +122,7 @@ namespace Battleship
                             positions[i, j] = id;
                             break;
                         case 6:
-                            id = _startingCell + (j * 10);
+                            id = _startingCell + (j * rowLength);
                             positions[i, j] = id;
                             break;
                         case 9:
@@ -171,11 +173,7 @@ namespace Battleship
                 {
                     finalPositions.Add(allAvailablePositions[(_shipSize * positionIndexSet) + i]);
                 }
-            }/*
-            else
-            {
-                Console.WriteLine("No available positions!");
-            }*/
+            }
             return finalPositions;
         }
 

@@ -28,7 +28,6 @@ namespace Battleship
             startGame(player1.Name, player2.Name);
 
             var guiBoard = new BoardGui(player1.board, player2.board);
-
             
             for (var i = 0; i < fleetTable.Length; i++)
             {
